@@ -1,0 +1,23 @@
+{
+  "scripts": {
+    "build": "webpack --config webpack.config.dev.js",
+    "watch": "webpack --watch --progress --config webpack.config.dev.js"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.2",
+    "css-loader": "^2.1.1",
+    "vue-loader": "^15.7.0",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "prismjs": "^1.15.0",
+    "style-loader": "^0.23.1",
+    "v-suggestions": "^1.1.1",
+    "vue": "^2.6.10",
+    "vue-prism-editor": "^0.1.2"
+  }
+}

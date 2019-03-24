@@ -49,7 +49,7 @@ export default {
         refresh () {
             axios
                 .get('snippets')
-                .then(response => this.snippets = response.data);
+                .then(response => this.snippets = response.data || []);
         },
         createSnippet () {
             axios

@@ -1,5 +1,6 @@
 <?php
 
+// Static router configuration
 $url = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 if ($url === '/') {
@@ -13,6 +14,7 @@ if (is_file(__DIR__.$url)) {
     return false;
 }
 
+// Loading dependencies
 require 'vendor/autoload.php';
 
 use Slim\App;
@@ -20,11 +22,24 @@ use Medoo\Medoo;
 
 $app = new App();
 
+// Setting up database
+touch('database.sqlite');
+
 $db = new Medoo([
     'database_type' => 'sqlite',
     'database_file' => 'database.sqlite',
 ]);
 
+$db->query(<<<SQL
+    CREATE TABLE IF NOT EXISTS snippets (
+        id INTEGER NOT NULL PRIMARY KEY,
+        content text NOT NULL,
+        language text,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+SQL);
+
+// REST router configuration
 $app->get('/snippets', function ($request, $response, $args) use ($db) {
     return $response->withJson(
         $db->select('snippets', '*')

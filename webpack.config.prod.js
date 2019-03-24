@@ -3,13 +3,13 @@
 const {VueLoaderPlugin} = require('vue-loader');
 const {StyleLoaderPlugin} = require('style-loader');
 const {CssLoaderPlugin} = require('css-loader');
+const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: [
         './src/js/main.js',
     ],
-    devtool: 'source-map',
     module: {
         rules: [
             {
@@ -28,4 +28,18 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
     ],
+    optimization: {
+        minimizer: [
+            new UglifyJsWebpackPlugin({
+                uglifyOptions: {
+                    output: {
+                        comments: false,
+                    },
+                },
+                cache: false,
+                parallel: true,
+                sourceMap: false,
+            }),
+        ],
+    },
 };

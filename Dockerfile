@@ -24,12 +24,14 @@ WORKDIR /app
 
 COPY package.json \
     package-lock.json \
-    webpack.config.dev.js \
+    webpack.config.prod.js \
     /app/
+
+RUN npm i
 
 COPY src /app/src/
 
-RUN npm i && npm run build
+RUN npm run build
 
 # stage 2
 FROM php:7-fpm-alpine
